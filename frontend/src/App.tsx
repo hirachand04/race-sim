@@ -2,7 +2,7 @@
  * F1 Race Replay Simulator - Main Application
  * 
  * This is the main application component that orchestrates:
- * - Race selection
+ * - Race selection with URL routing
  * - Timeline loading
  * - Playback controls
  * - Live lap details display
@@ -11,6 +11,7 @@
  */
 
 import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import LiveLapPanel from './components/LiveLapPanel';
 import PlaybackControls from './components/PlaybackControls';
 import DriverSidebar from './components/DriverSidebar';
@@ -25,40 +26,35 @@ import { useAnimation } from './hooks/useAnimation';
 import { getTelemetry } from './services/api';
 import { RaceTelemetry, DriverTelemetry } from './types';
 
-function App() {
-  // Race selection state
-  const [selectedRace, setSelectedRace] = useState<{
-    season: string;
-    round: string;
-    useMock: boolean;
-  } | null>(null);
+// Race Viewer Component - handles individual race display
+function RaceViewer() {
+  const { season, round } = useParams<{ season: string; round: string }>();
+  const navigate = useNavigate();
 
   // Telemetry state
   const [telemetry, setTelemetry] = useState<RaceTelemetry | null>(null);
   const [telemetryLoading, setTelemetryLoading] = useState(false);
 
-  // Fetch timeline data
+  // Fetch timeline data using URL params
   const { timeline, isLoading, error } = useRaceTimeline(
-    selectedRace?.season || '',
-    selectedRace?.round || '',
-    selectedRace?.useMock || false
+    season || '',
+    round || '',
+    false
   );
 
   // Fetch telemetry data when race is selected
   useEffect(() => {
-    if (selectedRace && !selectedRace.useMock) {
+    if (season && round) {
       setTelemetryLoading(true);
-      getTelemetry(selectedRace.season, selectedRace.round)
+      getTelemetry(season, round)
         .then(setTelemetry)
         .catch((err) => {
           console.error('Failed to fetch telemetry:', err);
           setTelemetry(null);
         })
         .finally(() => setTelemetryLoading(false));
-    } else {
-      setTelemetry(null);
     }
-  }, [selectedRace]);
+  }, [season, round]);
 
   // Create telemetry map for DriverSidebar
   const telemetryMap = useMemo(() => {
@@ -79,16 +75,10 @@ function App() {
     seekToPercent,
   } = useAnimation(timeline);
 
-  // Handle race selection
-  const handleRaceSelect = useCallback((season: string, round: string, useMock: boolean) => {
-    setSelectedRace({ season, round, useMock });
-  }, []);
-
   // Handle back to race selection
   const handleBackToSelection = useCallback(() => {
-    setSelectedRace(null);
-    setTelemetry(null);
-  }, []);
+    navigate('/');
+  }, [navigate]);
 
   // Get current lap from driver states
   const currentLap = useMemo(() => {
@@ -96,16 +86,7 @@ function App() {
     const leader = interpolatedDrivers.find((d) => d.position === 1);
     return leader?.lap || 0;
   }, [interpolatedDrivers]);
-
-  // Show race selector if no race selected
   if (!selectedRace) {
-    return (
-      <div className="min-h-screen bg-f1-black flex items-center justify-center p-4">
-        <RaceSelector onRaceSelect={handleRaceSelect} isLoading={false} />
-      </div>
-    );
-  }
-
   // Show loading state
   if (isLoading) {
     return (
@@ -287,6 +268,31 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+// Home Page - Race Selector
+function HomePage() {
+  const navigate = useNavigate();
+
+  const handleRaceSelect = useCallback((season: string, round: string) => {
+    navigate(`/race/${season}/${round}`);
+  }, [navigate]);
+
+  return (
+    <div className="min-h-screen bg-f1-black flex items-center justify-center p-4">
+      <RaceSelector onRaceSelect={handleRaceSelect} isLoading={false} />
+    </div>
+  );
+}
+
+// Main App with Routes
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/race/:season/:round" element={<RaceViewer />} />
+    </Routes>
   );
 }
 

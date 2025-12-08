@@ -14,7 +14,7 @@ import api from '../services/api';
 import { Race } from '../types';
 
 interface RaceSelectorProps {
-  onRaceSelect: (season: string, round: string, useMock: boolean) => void;
+  onRaceSelect: (season: string, round: string) => void;
   isLoading: boolean;
 }
 
@@ -105,8 +105,7 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
   }, [selectedSeason]);
 
   const handleRaceClick = (race: Race) => {
-    // When clicking a race from the list, use REAL data (not mock)
-    onRaceSelect(race.season, race.round, false);
+    onRaceSelect(race.season, race.round);
   };
 
   const handleSeasonSelect = (season: number) => {
