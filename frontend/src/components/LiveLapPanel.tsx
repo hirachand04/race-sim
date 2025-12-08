@@ -41,31 +41,31 @@ const LiveLapPanel: React.FC<LiveLapPanelProps> = ({
   return (
     <div className="bg-gray-900 rounded-lg overflow-hidden shadow-xl">
       {/* Compact Race Header */}
-      <div className="bg-gradient-to-r from-f1-red via-red-700 to-red-800 px-4 py-3 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-f1-red via-red-700 to-red-800 px-3 sm:px-4 py-2 sm:py-3 relative overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,255,255,0.1)_10px,rgba(255,255,255,0.1)_20px)]" />
         </div>
         
-        <div className="relative flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div>
-              <h2 className="text-white font-bold text-lg drop-shadow-lg">{raceName}</h2>
+        <div className="relative flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+            <div className="min-w-0">
+              <h2 className="text-white font-bold text-sm sm:text-lg drop-shadow-lg truncate">{raceName}</h2>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500 text-white text-xs font-bold rounded-full animate-pulse">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full" />
+                <span className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-green-500 text-white text-[10px] sm:text-xs font-bold rounded-full animate-pulse">
+                  <span className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-white rounded-full" />
                   LIVE
                 </span>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-6 flex-shrink-0">
             {/* Lap Counter */}
-            <div className="text-center bg-black/20 rounded-lg px-4 py-2">
-              <div className="text-white text-2xl font-bold font-mono tabular-nums">
-                {currentLap}<span className="text-red-300 text-sm">/{totalLaps}</span>
+            <div className="text-center bg-black/20 rounded-lg px-2 sm:px-4 py-1 sm:py-2">
+              <div className="text-white text-lg sm:text-2xl font-bold font-mono tabular-nums">
+                {currentLap}<span className="text-red-300 text-[10px] sm:text-sm">/{totalLaps}</span>
               </div>
-              <div className="text-red-200 text-xs uppercase tracking-wider">Lap</div>
+              <div className="text-red-200 text-[10px] sm:text-xs uppercase tracking-wider">Lap</div>
             </div>
             {/* Active/Retired */}
             <div className="text-center hidden sm:block">
@@ -101,7 +101,7 @@ const LiveLapPanel: React.FC<LiveLapPanelProps> = ({
       </div>
 
       {/* Quick Stats Row */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-700">
+      <div className="grid grid-cols-4 gap-px bg-gray-700">
         {/* Top 3 Podium */}
         {podiumDrivers.map((state, idx) => {
           const driver = driverMap.get(state.driverId);
@@ -111,27 +111,27 @@ const LiveLapPanel: React.FC<LiveLapPanelProps> = ({
           return (
             <div 
               key={state.driverId} 
-              className={`${bgColors[idx]} p-3 text-center transition-all duration-300 hover:bg-gray-700`}
+              className={`${bgColors[idx]} p-2 sm:p-3 text-center transition-all duration-300 hover:bg-gray-700`}
             >
-              <div className="text-lg mb-1">{medals[idx]}</div>
+              <div className="text-sm sm:text-lg mb-0.5 sm:mb-1">{medals[idx]}</div>
               <div 
-                className="text-white font-bold text-sm"
+                className="text-white font-bold text-xs sm:text-sm"
                 style={{ textShadow: `0 0 10px ${driver.color}` }}
               >
                 {driver.code}
               </div>
-              <div className="text-gray-300 text-xs truncate">
+              <div className="text-gray-300 text-[10px] sm:text-xs truncate hidden sm:block">
                 {driver.givenName} {driver.familyName}
               </div>
               <div 
-                className="text-[10px] truncate mt-1 px-2 py-0.5 rounded-full inline-block"
+                className="text-[8px] sm:text-[10px] truncate mt-0.5 sm:mt-1 px-1 sm:px-2 py-0.5 rounded-full inline-block hidden sm:inline-block"
                 style={{ backgroundColor: `${driver.color}30`, color: driver.color }}
               >
                 {driver.constructor.name}
               </div>
             </div>
           );
-        })}
+        })}}
         
         {/* Fastest Lap / Pit Info */}
         <div className="bg-gray-800 p-2">

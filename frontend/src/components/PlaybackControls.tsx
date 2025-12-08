@@ -57,33 +57,33 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
   const speedOptions = [0.5, 1, 2, 4];
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 space-y-4 shadow-lg">
+    <div className="bg-gray-800 rounded-lg p-2 sm:p-4 space-y-2 sm:space-y-4 shadow-lg">
       {/* Race Info */}
       {metadata && (
         <div className="text-center">
-          <h2 className="text-lg font-bold text-white">{metadata.raceName}</h2>
-          <p className="text-sm text-gray-400">
+          <h2 className="text-sm sm:text-lg font-bold text-white truncate">{metadata.raceName}</h2>
+          <p className="text-xs sm:text-sm text-gray-400 truncate">
             {metadata.circuitName} - {metadata.season}
           </p>
         </div>
       )}
       
       {/* Current Status */}
-      <div className="flex justify-between items-center text-sm">
+      <div className="flex justify-between items-center text-xs sm:text-sm">
         <div className="text-white">
           <span className="text-gray-400">Lap: </span>
           <span className="font-bold tabular-nums">{currentLap}</span>
           <span className="text-gray-400"> / {metadata?.totalLaps || '?'}</span>
         </div>
         <div className="text-white">
-          <span className="text-gray-400">Time: </span>
-          <span className="font-mono tabular-nums">{formatLapTime(currentTimeMs)}</span>
+          <span className="text-gray-400 hidden sm:inline">Time: </span>
+          <span className="font-mono tabular-nums text-xs sm:text-sm">{formatLapTime(currentTimeMs)}</span>
         </div>
       </div>
       
       {/* Timeline Scrubber */}
       <div 
-        className="h-4 bg-gray-700 rounded-full cursor-pointer relative overflow-hidden group"
+        className="h-3 sm:h-4 bg-gray-700 rounded-full cursor-pointer relative overflow-hidden group"
         onClick={handleTimelineClick}
       >
         {/* Progress bar with gradient */}
@@ -93,25 +93,25 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
         />
         {/* Scrubber handle */}
         <div 
-          className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg 
+          className="absolute top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 bg-white rounded-full shadow-lg 
             transition-transform duration-150 group-hover:scale-110 border-2 border-f1-red"
-          style={{ left: `calc(${progressPercent}% - 10px)` }}
+          style={{ left: `calc(${progressPercent}% - 8px)` }}
         />
         {/* Hover effect */}
         <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
       
       {/* Playback Buttons */}
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-center items-center gap-2 sm:gap-4">
         {/* Restart Button */}
         <button
           onClick={onRestart}
-          className="p-3 bg-gray-700 hover:bg-gray-600 rounded-full transition-all duration-200 
+          className="p-2 sm:p-3 bg-gray-700 hover:bg-gray-600 rounded-full transition-all duration-200 
             hover:scale-110 active:scale-95 focus:ring-2 focus:ring-f1-red focus:ring-offset-2 focus:ring-offset-gray-800"
           title="Restart"
         >
           <svg 
-            className="w-5 h-5 text-white" 
+            className="w-4 h-4 sm:w-5 sm:h-5 text-white" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
@@ -128,7 +128,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
         {/* Play/Pause Button */}
         <button
           onClick={isPlaying ? onPause : onPlay}
-          className={`p-4 rounded-full transition-all duration-200 
+          className={`p-3 sm:p-4 rounded-full transition-all duration-200 
             hover:scale-110 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800
             ${isPlaying 
               ? 'bg-f1-red hover:bg-red-700 focus:ring-red-500 animate-pulse' 
@@ -137,7 +137,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
         >
           {isPlaying ? (
             <svg 
-              className="w-6 h-6 text-white" 
+              className="w-5 h-5 sm:w-6 sm:h-6 text-white" 
               fill="currentColor" 
               viewBox="0 0 24 24"
             >
@@ -145,7 +145,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
             </svg>
           ) : (
             <svg 
-              className="w-6 h-6 text-white" 
+              className="w-5 h-5 sm:w-6 sm:h-6 text-white" 
               fill="currentColor" 
               viewBox="0 0 24 24"
             >
@@ -155,12 +155,12 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
         </button>
         
         {/* Speed Control */}
-        <div className="flex items-center gap-1 bg-gray-900 rounded-lg p-1">
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-gray-900 rounded-lg p-0.5 sm:p-1">
           {speedOptions.map((s) => (
             <button
               key={s}
               onClick={() => onSpeedChange(s)}
-              className={`px-3 py-2 rounded-md text-sm font-bold transition-all duration-200
+              className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-bold transition-all duration-200
                 ${speed === s
                   ? 'bg-f1-red text-white shadow-lg scale-105'
                   : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700'

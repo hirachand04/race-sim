@@ -114,34 +114,34 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl p-6 max-w-3xl mx-auto shadow-2xl border border-gray-700 animate-fade-in">
+    <div className="bg-gray-800 rounded-xl p-3 sm:p-6 max-w-3xl mx-auto shadow-2xl border border-gray-700 animate-fade-in w-full">
       {/* Header with Logo */}
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold text-white mb-2">
+      <div className="text-center mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">
           <span className="text-f1-red">F1</span> Race Replay Simulator
         </h2>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-400 text-xs sm:text-sm">
           Relive the most exciting moments in Formula 1 history
         </p>
       </div>
       
       {/* Data Availability Legend */}
-      <div className="flex justify-center gap-6 mb-6 text-sm bg-gray-900/50 rounded-lg py-3 px-4">
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+      <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-6 mb-4 sm:mb-6 text-xs sm:text-sm bg-gray-900/50 rounded-lg py-2 sm:py-3 px-3 sm:px-4">
+        <div className="flex items-center gap-2 justify-center">
+          <span className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-green-500 animate-pulse"></span>
           <span className="text-gray-300">Full Replay (2004+)</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
+        <div className="flex items-center gap-2 justify-center">
+          <span className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-yellow-500"></span>
           <span className="text-gray-300">Results Only (1950-2003)</span>
         </div>
       </div>
 
       {/* View Mode Toggle */}
-      <div className="flex justify-center gap-2 mb-4">
+      <div className="flex justify-center gap-2 mb-3 sm:mb-4">
         <button
           onClick={() => setViewMode('era')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
             viewMode === 'era' 
               ? 'bg-f1-red text-white shadow-lg shadow-red-500/20' 
               : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-white'
@@ -151,7 +151,7 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
         </button>
         <button
           onClick={() => setViewMode('dropdown')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
             viewMode === 'dropdown' 
               ? 'bg-f1-red text-white shadow-lg shadow-red-500/20' 
               : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-white'
@@ -248,8 +248,8 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
             <p>Loading races...</p>
           </div>
         ) : races.length === 0 ? (
-          <div className="text-center text-gray-400 py-8">
-            <span className="text-3xl mb-2 block">🏁</span>
+          <div className="text-center text-gray-400 py-6 sm:py-8">
+            <span className="text-2xl sm:text-3xl mb-2 block">🏁</span>
             No races found for this season
           </div>
         ) : (
@@ -258,30 +258,30 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
               key={`${race.season}-${race.round}`}
               onClick={() => handleRaceClick(race)}
               disabled={isLoading}
-              className="w-full p-4 bg-gray-700/50 hover:bg-gray-600 rounded-lg 
+              className="w-full p-2.5 sm:p-4 bg-gray-700/50 hover:bg-gray-600 rounded-lg 
                 text-left transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
                 hover:translate-x-1 hover:shadow-lg group border border-transparent hover:border-gray-600"
               style={{ animationDelay: `${index * 30}ms` }}
             >
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 text-xs font-bold group-hover:bg-f1-red group-hover:text-white transition-colors">
+              <div className="flex justify-between items-center gap-2">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 text-[10px] sm:text-xs font-bold group-hover:bg-f1-red group-hover:text-white transition-colors flex-shrink-0">
                     {race.round}
                   </div>
-                  <div>
-                    <div className="text-white font-bold text-sm group-hover:text-f1-red transition-colors">{race.raceName}</div>
-                    <div className="text-gray-400 text-xs">
+                  <div className="min-w-0">
+                    <div className="text-white font-bold text-xs sm:text-sm group-hover:text-f1-red transition-colors truncate">{race.raceName}</div>
+                    <div className="text-gray-400 text-[10px] sm:text-xs truncate">
                       {race.Circuit.circuitName} • {race.Circuit.Location.country}
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-shrink-0">
                   {supportsReplay ? (
-                    <span className="px-2 py-1 bg-green-900/50 text-green-400 text-xs rounded-full group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-green-900/50 text-green-400 text-[10px] sm:text-xs rounded-full group-hover:bg-green-600 group-hover:text-white transition-colors">
                       ▶ Play
                     </span>
                   ) : (
-                    <span className="px-2 py-1 bg-yellow-900/50 text-yellow-400 text-xs rounded-full">
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-yellow-900/50 text-yellow-400 text-[10px] sm:text-xs rounded-full">
                       View
                     </span>
                   )}
@@ -293,7 +293,7 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
       </div>
       
       {/* Total Count */}
-      <div className="mt-4 text-center text-xs text-gray-500 pt-3 border-t border-gray-700">
+      <div className="mt-3 sm:mt-4 text-center text-[10px] sm:text-xs text-gray-500 pt-2 sm:pt-3 border-t border-gray-700">
         {races.length} race{races.length !== 1 ? 's' : ''} in {selectedSeason} • 
         {seasons.length} seasons from 1950
       </div>
