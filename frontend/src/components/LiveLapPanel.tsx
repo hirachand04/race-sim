@@ -131,7 +131,7 @@ const LiveLapPanel: React.FC<LiveLapPanelProps> = ({
               </div>
             </div>
           );
-        })}}
+        })}
         
         {/* Fastest Lap / Pit Info */}
         <div className="bg-gray-800 p-2">

@@ -86,7 +86,7 @@ function RaceViewer() {
     const leader = interpolatedDrivers.find((d) => d.position === 1);
     return leader?.lap || 0;
   }, [interpolatedDrivers]);
-  if (!selectedRace) {
+
   // Show loading state
   if (isLoading) {
     return (
