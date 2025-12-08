@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- F1 Car Icon -->
+  <rect fill="#E10600" width="100" height="100" rx="15"/>
+  <path fill="#FFFFFF" d="M15 55 L25 45 L75 45 L85 55 L85 60 L75 60 L70 55 L30 55 L25 60 L15 60 Z"/>
+  <circle fill="#333" cx="25" cy="58" r="8"/>
+  <circle fill="#333" cx="75" cy="58" r="8"/>
+  <circle fill="#888" cx="25" cy="58" r="4"/>
+  <circle fill="#888" cx="75" cy="58" r="4"/>
+  <path fill="#FFFFFF" d="M40 45 L45 35 L55 35 L60 45 Z"/>
+</svg>
