@@ -102,68 +102,6 @@ race-sim/
 └── README.md
 ```
 
-## Installation
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/hirachand04/race-sim.git
-   cd race-sim
-   ```
-
-2. **Install backend dependencies**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Install frontend dependencies**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-
-## Running the Application
-
-### Development Mode
-
-1. **Start the backend server** (Terminal 1)
-   ```bash
-   cd backend
-   npm run dev
-   ```
-   The API server will start at `http://localhost:3001`
-
-2. **Start the frontend dev server** (Terminal 2)
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-   The React app will start at `http://localhost:5173`
-
-3. **Open your browser** and navigate to `http://localhost:5173`
-
-### Production Build
-
-1. **Build the backend**
-   ```bash
-   cd backend
-   npm run build
-   npm start
-   ```
-
-2. **Build the frontend**
-   ```bash
-   cd frontend
-   npm run build
-   npm run preview
-   ```
-
 ## API Endpoints
 
 | Endpoint | Description |
