@@ -112,7 +112,7 @@ race-sim/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/hirachand04/race-sim.git
    cd race-sim
    ```
 
