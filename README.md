@@ -2,8 +2,6 @@
 
 A full-stack web application that visualizes F1 race replays with animated driver positions on 2D SVG track maps. Watch races unfold lap-by-lap with real-time position updates, overtakes, pitstops, and more!
 
-![F1 Race Replay Simulator]
-
 ## Features
 
 ###  Track Visualization
@@ -24,7 +22,7 @@ A full-stack web application that visualizes F1 race replays with animated drive
 - Last lap time display
 - Gap to leader calculation
 - Pitstop indicator (PIT badge)
-- Fastest lap highlight (purple)
+- Fastest lap highlight 
 - DNF indication
 
 ###  Event Feed
