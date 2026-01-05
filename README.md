@@ -1,4 +1,4 @@
-# F1 Race Replay Simulator 🏎️
+# F1 Race Replay Simulator 
 
 A full-stack web application that visualizes F1 race replays with animated driver positions on 2D SVG track maps. Watch races unfold lap-by-lap with real-time position updates, overtakes, pitstops, and more!
 
@@ -6,19 +6,19 @@ A full-stack web application that visualizes F1 race replays with animated drive
 
 ## Features
 
-### 🏁 Track Visualization
+###  Track Visualization
 - SVG-based track maps for multiple circuits (Monza, Silverstone, Monaco, Spa)
 - Smooth car animation using `requestAnimationFrame`
 - Pitlane visualization with pit stop animations
 - Start/finish line markers
 
-### 🎮 Playback Controls
+###  Playback Controls
 - Play / Pause / Restart functionality
 - Variable speed playback (1x, 2x, 4x)
 - Timeline scrubber for seeking to any point in the race
 - Current lap and time display
 
-### 📊 Live Standings Sidebar
+###  Live Standings Sidebar
 - Real-time position updates
 - Team colors for each driver
 - Last lap time display
@@ -27,14 +27,14 @@ A full-stack web application that visualizes F1 race replays with animated drive
 - Fastest lap highlight (purple)
 - DNF indication
 
-### 📢 Event Feed
+###  Event Feed
 - Live race events as they happen
 - Overtake notifications
 - Pitstop announcements
 - DNF alerts
 - Fastest lap celebration
 
-### 🔌 API Integration
+###  API Integration
 - Real F1 data from Jolpica API (open-source Ergast alternative)
 - Mock data fallback for offline testing
 - Season and race selection
