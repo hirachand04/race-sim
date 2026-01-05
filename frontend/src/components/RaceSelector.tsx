@@ -39,7 +39,7 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
   const [selectedSeason, setSelectedSeason] = useState<string>('');
   const [races, setRaces] = useState<Race[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loadingSeasons, setLoadingSeasons] = useState(false);
+  const [loadingSeasons, setLoadingSeasons] = useState(true); // Start as true to show loading initially
   const [loadingRaces, setLoadingRaces] = useState(false);
   const [viewMode, setViewMode] = useState<'dropdown' | 'era'>('era');
 
@@ -111,6 +111,52 @@ const RaceSelector: React.FC<RaceSelectorProps> = ({ onRaceSelect, isLoading }) 
   const handleSeasonSelect = (season: number) => {
     setSelectedSeason(season.toString());
   };
+
+  // Show full-page loading screen while initially loading seasons
+  if (loadingSeasons) {
+    return (
+      <div className="bg-gray-800 rounded-xl p-6 sm:p-8 max-w-3xl mx-auto shadow-2xl border border-gray-700 animate-fade-in w-full">
+        <div className="flex flex-col items-center justify-center py-12 sm:py-16">
+          {/* F1 Logo */}
+          <div className="mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white">
+              <span className="text-f1-red">F1</span> Race Replay
+            </h2>
+          </div>
+          
+          {/* Animated Spinner */}
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-6">
+            {/* Outer ring */}
+            <div className="absolute inset-0 border-4 border-gray-700 rounded-full"></div>
+            {/* Spinning ring */}
+            <div className="absolute inset-0 border-4 border-transparent border-t-f1-red rounded-full animate-spin"></div>
+            {/* Inner glow */}
+            <div className="absolute inset-2 border-2 border-gray-600 rounded-full"></div>
+            {/* Center car icon */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl sm:text-3xl">🏎️</span>
+            </div>
+          </div>
+          
+          {/* Loading text */}
+          <p className="text-white text-lg sm:text-xl font-semibold mb-2">Starting Race Servers</p>
+          <p className="text-gray-400 text-sm sm:text-base mb-4">Loading F1 data, please wait...</p>
+          
+          {/* Animated dots */}
+          <div className="flex gap-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-f1-red rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-f1-red rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-f1-red rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
+          
+          {/* Hint text */}
+          <p className="text-gray-500 text-xs sm:text-sm mt-6">
+            First load may take up to 30 seconds while server wakes up
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-800 rounded-xl p-3 sm:p-6 max-w-3xl mx-auto shadow-2xl border border-gray-700 animate-fade-in w-full">
